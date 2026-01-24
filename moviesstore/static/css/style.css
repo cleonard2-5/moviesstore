@@ -36,6 +36,9 @@
   max-width: 200px;
 }
 .img-card-400 {
-  width: fit-content;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   max-height: 400px;
+  object-fit: contain;
 }
