@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Movie, Review, Report
+from .models import Movie, Review, Report, Most
 
 # Register your models here.
 from .models import Movie
@@ -16,3 +16,9 @@ class ReviewAdmin(admin.Review):
     list_display = ("id","user", "comment", "movie", "date", "reported", "commentCounter")
     list_filter = ['user','reported', 'movie', 'date', 'commentCounter']
     ordering = ['-commentCounter']
+
+@admin.register(Most)
+class MostAdmin(admin.ModelAdmin):
+    list_display = ('movie', 'reviewCounter', 'amountPurchased')
+    list_filter = ['amountPurchased', 'reviewCounter']
+
