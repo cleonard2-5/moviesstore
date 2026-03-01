@@ -9,5 +9,14 @@ class MovieAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 admin.site.register(Movie, MovieAdmin)
-admin.site.register(Review)
 admin.site.register(Report)
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ("id","user", "comment", "movie", "date", "reported")
+    list_filter = ("comment",)
+
+    def commentCounter(self, obj):
+        return obj.comment.count()
+
+    commentCounter.short_description = 'Number of Comments'
