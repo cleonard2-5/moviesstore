@@ -22,10 +22,16 @@ class Review(models.Model):
     user = models.ForeignKey(User,
         on_delete=models.CASCADE)
     reported = models.BooleanField(default=False)
+    commentCounter = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return str(self.id) + ' - ' + self.movie.name
         
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        counter = Review.objects.filter(user=self.user).count()
+        Review.objects.filter(user=self.user).update(commentCounter=counter)
+
 class Report(models.Model):
     id = models.AutoField(primary_key=True)
     comment = models.CharField(max_length=255)

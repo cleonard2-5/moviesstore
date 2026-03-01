@@ -12,12 +12,7 @@ admin.site.register(Movie, MovieAdmin)
 admin.site.register(Report)
 
 @admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
-    list_display = ("id","user", "comment", "movie", "date", "reported")
-
-    def commentCounter(self, obj):
-        return obj.comment.count()
-
-    commentCounter.short_description = 'Number of Comments'
-    list_filter = ("coummentCounter",)
-
+class ReviewAdmin(admin.Review):
+    list_display = ("id","user", "comment", "movie", "date", "reported", "commentCounter")
+    list_filter = ['user','reported', 'movie', 'date', 'commentCounter']
+    ordering = ['-commentCounter']
