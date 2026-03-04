@@ -12,7 +12,7 @@ admin.site.register(Movie, MovieAdmin)
 admin.site.register(Report)
 
 @admin.register(Review)
-class ReviewAdmin(admin.Review):
+class ReviewAdmin(admin.ModelAdmin):
     list_display = ("id","user", "comment", "movie", "date", "reported", "commentCounter")
     list_filter = ['user','reported', 'movie', 'date', 'commentCounter']
     ordering = ['-commentCounter']
